@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking confirmed</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="hf-page">
+    <main class="hf-main">
+      <section class="hf-booking-card">
+        <div class="hf-hero">
+          <p class="hf-kicker">Horror Factory</p>
+          <h1 id="successTitle">Rezervácia potvrdená</h1>
+          <p class="hf-subtitle" id="successSubtitle">
+            Vaša rezervácia bola úspešne vytvorená.
+          </p>
+        </div>
+
+        <div class="hf-grid" style="grid-template-columns: 1fr;">
+          <div class="hf-panel">
+            <div class="hf-summary">
+              <div class="hf-summary-row">
+                <span id="sNameLabel">Meno</span>
+                <strong id="sName">—</strong>
+              </div>
+              <div class="hf-summary-row">
+                <span id="sDateLabel">Dátum</span>
+                <strong id="sDate">—</strong>
+              </div>
+              <div class="hf-summary-row">
+                <span id="sTimeLabel">Čas</span>
+                <strong id="sTime">—</strong>
+              </div>
+              <div class="hf-summary-row">
+                <span id="sPlayersLabel">Počet osôb</span>
+                <strong id="sPlayers">—</strong>
+              </div>
+              <div class="hf-summary-row">
+                <span id="sPriceLabel">Cena</span>
+                <strong id="sPrice">—</strong>
+              </div>
+              <div class="hf-summary-row">
+                <span id="sAddressLabel">Adresa</span>
+                <strong id="sAddress">—</strong>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+              <a id="mapsBtn" class="hf-primary-btn" href="#" target="_blank" rel="noopener" style="text-align:center; text-decoration:none;">
+                Otvoriť v Google Maps
+              </a>
+              <a href="/" class="hf-primary-btn" style="text-align:center; text-decoration:none; background: linear-gradient(180deg, #2a2a2a, #111); box-shadow:none;">
+                Nová rezervácia
+              </a>
+            </div>
+
+            <div class="hf-book-message warn" id="cancelNote" style="margin-top:16px;">
+              Ak potrebujete rezerváciu zrušiť, kontaktujte nás priamo.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const sk = {
+      successTitle: "Rezervácia potvrdená",
+      successSubtitle: "Vaša rezervácia bola úspešne vytvorená.",
+      sNameLabel: "Meno",
+      sDateLabel: "Dátum",
+      sTimeLabel: "Čas",
+      sPlayersLabel: "Počet osôb",
+      sPriceLabel: "Cena",
+      sAddressLabel: "Adresa",
+      mapsBtn: "Otvoriť v Google Maps",
+      cancelNote: "Ak potrebujete rezerváciu zrušiť, kontaktujte nás priamo."
+    };
+
+    async function initSuccess() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      if (!id) return;
+
+      const res = await fetch("/api/booking/" + id);
+      const data = await res.json();
+
+      document.getElementById("successTitle").textContent = sk.successTitle;
+      document.getElementById("successSubtitle").textContent = sk.successSubtitle;
+      document.getElementById("sNameLabel").textContent = sk.sNameLabel;
+      document.getElementById("sDateLabel").textContent = sk.sDateLabel;
+      document.getElementById("sTimeLabel").textContent = sk.sTimeLabel;
+      document.getElementById("sPlayersLabel").textContent = sk.sPlayersLabel;
+      document.getElementById("sPriceLabel").textContent = sk.sPriceLabel;
+      document.getElementById("sAddressLabel").textContent = sk.sAddressLabel;
+      document.getElementById("mapsBtn").textContent = sk.mapsBtn;
+      document.getElementById("cancelNote").textContent = sk.cancelNote;
+
+      document.getElementById("sName").textContent = data.name || "—";
+      document.getElementById("sDate").textContent = data.date || "—";
+      document.getElementById("sTime").textContent = data.slotLabel || data.slot_id || "—";
+      document.getElementById("sPlayers").textContent = data.players || "—";
+      document.getElementById("sPrice").textContent = "€" + (data.price_total_eur || 0);
+      document.getElementById("sAddress").textContent = data.address || "—";
+      document.getElementById("mapsBtn").href = data.mapUrl || "#";
+    }
+
+    initSuccess();
+  </script>
+</body>
+</html>

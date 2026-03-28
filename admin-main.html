@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main admin dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-role="MAIN">
+  <div class="hf-page">
+    <main class="hf-main">
+      <section class="hf-booking-card">
+        <div class="admin-topbar">
+          <div>
+            <p class="hf-kicker">Horror Factory</p>
+            <h1>Main Admin Dashboard</h1>
+            <p class="hf-subtitle">Kompletný prehľad rezervácií, logov a správy.</p>
+          </div>
+
+          <div class="admin-userbox">
+            <div class="admin-avatar">👤</div>
+            <div>
+              <div id="adminUsername">—</div>
+              <div id="adminRole" class="admin-role">MAIN</div>
+            </div>
+            <button class="lang-btn" type="button" onclick="logout()">Logout</button>
+          </div>
+        </div>
+
+        <div class="admin-widgets">
+          <div class="hf-panel">
+            <div class="hf-panel-head">
+              <h2>Today's groups</h2>
+            </div>
+            <div id="todaysGroups" class="widget-list">Loading...</div>
+          </div>
+
+          <div class="hf-panel">
+            <div class="hf-panel-head">
+              <h2>Next upcoming booking</h2>
+            </div>
+            <div id="nextUpcoming" class="widget-list">Loading...</div>
+          </div>
+        </div>
+
+        <div class="admin-controls hf-panel">
+          <div class="admin-search-row">
+            <div class="hf-field">
+              <label for="search">Search</label>
+              <input id="search" type="text" placeholder="Name / email / phone / coupon" />
+            </div>
+            <div class="hf-field">
+              <label for="dateFilter">Date</label>
+              <input id="dateFilter" type="date" />
+            </div>
+            <div class="admin-actions-inline">
+              <button class="hf-primary-btn small" type="button" onclick="exportExcel()">Export Excel</button>
+            </div>
+          </div>
+          <div id="adminMessage" class="hf-book-message"></div>
+        </div>
+
+        <div class="admin-layout">
+          <div class="hf-panel">
+            <div class="hf-panel-head">
+              <h2>Calendar</h2>
+            </div>
+            <div id="adminCalendar" class="admin-calendar-grid"></div>
+          </div>
+
+          <div class="hf-panel">
+            <div class="hf-panel-head">
+              <h2>Bookings table</h2>
+            </div>
+            <div class="table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Slot</th>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Players</th>
+                    <th>Coupon</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="hf-panel" style="margin-top:18px;">
+          <div class="hf-panel-head">
+            <h2>Activity log</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                  <th>Booking ID</th>
+                  <th>Details</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody id="activityBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

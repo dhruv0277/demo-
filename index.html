@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horror Factory Booking</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="hf-page">
+    <header class="hf-topbar">
+      <div class="hf-logo-wrap">
+        <div class="hf-logo">HORROR <span>factory</span></div>
+      </div>
+
+      <div class="hf-lang-switch">
+        <button id="langSkBtn" class="lang-btn active" type="button">SK</button>
+        <button id="langEnBtn" class="lang-btn" type="button">EN</button>
+      </div>
+    </header>
+
+    <main class="hf-main">
+      <section class="hf-booking-card">
+        <div class="hf-hero">
+          <p class="hf-kicker" id="heroKicker">Horror Factory Booking</p>
+          <h1 id="heroTitle">Rezervujte si vstup</h1>
+          <p class="hf-subtitle" id="heroSubtitle">
+            Vyberte dátum, čas a vyplňte svoje údaje.
+          </p>
+        </div>
+
+        <div class="hf-grid">
+          <div class="hf-left">
+            <div class="hf-panel">
+              <div class="hf-panel-head">
+                <h2 id="calendarTitle">Vyberte dátum</h2>
+                <div class="hf-month-nav">
+                  <button type="button" id="prevMonthBtn" class="nav-btn">‹</button>
+                  <div id="monthLabel" class="month-label"></div>
+                  <button type="button" id="nextMonthBtn" class="nav-btn">›</button>
+                </div>
+              </div>
+
+              <div class="hf-calendar">
+                <div class="hf-weekdays" id="weekdayRow"></div>
+                <div class="hf-calendar-grid" id="calendarGrid"></div>
+              </div>
+            </div>
+
+            <div class="hf-panel">
+              <div class="hf-panel-head">
+                <h2 id="timeTitle">Vyberte čas</h2>
+                <div class="hf-chip" id="selectedDateChip">—</div>
+              </div>
+
+              <div id="slotsWrap" class="hf-slots-wrap">
+                <div class="hf-empty" id="slotsEmpty">
+                  Najprv vyberte dátum.
+                </div>
+                <div id="slotsGrid" class="hf-slots-grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hf-right">
+            <div class="hf-panel">
+              <div class="hf-panel-head">
+                <h2 id="detailsTitle">Vaše údaje</h2>
+              </div>
+
+              <div class="hf-form">
+                <div class="hf-field">
+                  <label for="name" id="labelName">Meno a priezvisko</label>
+                  <input id="name" type="text" />
+                </div>
+
+                <div class="hf-field">
+                  <label for="email" id="labelEmail">E-mail</label>
+                  <input id="email" type="email" />
+                </div>
+
+                <div class="hf-field">
+                  <label for="phone" id="labelPhone">Mobilné číslo</label>
+                  <input id="phone" type="text" />
+                </div>
+
+                <div class="hf-field">
+                  <label for="players" id="labelPlayers">Počet osôb</label>
+                  <select id="players">
+                    <option value="">—</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+
+                <div class="hf-field">
+                  <label for="coupon" id="labelCoupon">Kupón</label>
+                  <input id="coupon" type="text" />
+                  <div id="couponMessage" class="hf-helper"></div>
+                </div>
+
+                <div class="hf-field">
+                  <label for="notes" id="labelNotes">Poznámka</label>
+                  <textarea id="notes" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="hf-panel">
+              <div class="hf-panel-head">
+                <h2 id="summaryTitle">Zhrnutie</h2>
+              </div>
+
+              <div class="hf-summary">
+                <div class="hf-summary-row">
+                  <span id="summaryDateLabel">Dátum</span>
+                  <strong id="summaryDateValue">—</strong>
+                </div>
+
+                <div class="hf-summary-row">
+                  <span id="summaryTimeLabel">Čas</span>
+                  <strong id="summaryTimeValue">—</strong>
+                </div>
+
+                <div class="hf-summary-row">
+                  <span id="summaryPlayersLabel">Počet osôb</span>
+                  <strong id="summaryPlayersValue">—</strong>
+                </div>
+
+                <div class="hf-summary-row">
+                  <span id="summaryBaseLabel">Základná cena</span>
+                  <strong id="summaryBaseValue">€0</strong>
+                </div>
+
+                <div class="hf-summary-row">
+                  <span id="summaryDiscountLabel">Zľava</span>
+                  <strong id="summaryDiscountValue">€0</strong>
+                </div>
+
+                <div class="hf-summary-row total">
+                  <span id="summaryTotalLabel">Spolu</span>
+                  <strong id="summaryTotalValue">€0</strong>
+                </div>
+              </div>
+
+              <div class="hf-address-box">
+                <div class="hf-address-title" id="addressTitle">Miesto</div>
+                <div id="businessName">Horror Factory</div>
+                <div id="businessAddress">Nobelova 1300/30, 831 02 Bratislava</div>
+              </div>
+
+              <button id="bookBtn" class="hf-primary-btn" type="button">
+                Rezervovať teraz
+              </button>
+
+              <div id="bookMessage" class="hf-book-message"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

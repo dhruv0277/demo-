@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="hf-page">
+    <main class="hf-main">
+      <section class="hf-booking-card" style="max-width: 520px; margin: 0 auto;">
+        <div class="hf-hero">
+          <p class="hf-kicker">Horror Factory</p>
+          <h1>Admin login</h1>
+          <p class="hf-subtitle">Prihláste sa do administračného panelu.</p>
+        </div>
+
+        <div class="hf-panel">
+          <div class="hf-form">
+            <div class="hf-field">
+              <label for="username">Username</label>
+              <input id="username" type="text" />
+            </div>
+
+            <div class="hf-field">
+              <label for="password">Password</label>
+              <input id="password" type="password" />
+            </div>
+
+            <button id="loginBtn" class="hf-primary-btn" type="button">Login</button>
+            <div id="loginMessage" class="hf-book-message"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function setMessage(text, type = "") {
+      const box = document.getElementById("loginMessage");
+      box.textContent = text;
+      box.className = "hf-book-message";
+      if (type) box.classList.add(type);
+    }
+
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!username || !password) {
+        setMessage("Please fill username and password.", "err");
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          setMessage(data.error || "Login failed.", "err");
+          return;
+        }
+
+        if (data.role === "MAIN") {
+          window.location.href = "/admin-main.html";
+        } else {
+          window.location.href = "/admin-staff.html";
+        }
+      } catch (err) {
+        setMessage("Login failed.", "err");
+      }
+    });
+  </script>
+</body>
+</html>
